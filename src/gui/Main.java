@@ -62,10 +62,21 @@ public class Main {
 			frameK3.setVisible(true);
 			break;
 			
-			case 12: FrameBrisanjeLekova frameB= new FrameKupovina1();
+			/*case 12: FrameBrisanjeLekova frameB= new FrameKupovina1();
 			frameB.setVisible(true);
 			break;
 			
+			case 13: FrameIzvestaj1 frameI1= new FrameKupovina1();
+			frameI1.setVisible(true);
+			break;
+			
+			case 14: FrameIzvestaj2 frameI2= new FrameKupovina1();
+			frameI2.setVisible(true);
+			break;
+			
+			case 15: FrameIzvestaj3 frameI3= new FrameKupovina1();
+			frameI3.setVisible(true);
+			break;*/
 			
 			default:
 				System.out.println("Uneli ste nepostojeću vrednost!");
