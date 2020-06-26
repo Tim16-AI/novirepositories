@@ -64,19 +64,19 @@ public class Main {
 			
 			/*case 12: FrameBrisanjeLekova frameB= new FrameKupovina1();
 			frameB.setVisible(true);
-			break;
+			break;*/
 			
-			case 13: FrameIzvestaj1 frameI1= new FrameKupovina1();
+			case 13: FrameIzvestaj1 frameI1= new FrameIzvestaj1();
 			frameI1.setVisible(true);
 			break;
 			
-			case 14: FrameIzvestaj2 frameI2= new FrameKupovina1();
+			case 14: FrameIzvestaj2 frameI2= new FrameIzvestaj2();
 			frameI2.setVisible(true);
 			break;
 			
-			case 15: FrameIzvestaj3 frameI3= new FrameKupovina1();
+			case 15: FrameIzvestaj3 frameI3= new FrameIzvestaj3();
 			frameI3.setVisible(true);
-			break;*/
+			break;
 			
 			default:
 				System.out.println("Uneli ste nepostojeću vrednost!");
