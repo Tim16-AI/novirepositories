@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -21,9 +23,13 @@ import gui.Frame.ImagePanel;
 
 public class FrameLekovi1 extends JFrame {
 	
+	LekoviTabela tblLekovi;
+	DodajLek dodajLek;
  
     public FrameLekovi1 ()  {
 		
+    	dodajLek = new DodajLek();
+    	
 		Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
         int screenHeight = screenSize.height;
@@ -87,6 +93,13 @@ public class FrameLekovi1 extends JFrame {
 		btnDodavanje.setBackground(new Color(77,77,77));	//promenjena pozadina dugmeta
 		btnDodavanje.setForeground(Color.WHITE);
 		
+		btnDodavanje.addActionListener(new ActionListener() { 
+		    public void actionPerformed(ActionEvent e) { 
+		    	centralni.remove(tblLekovi);
+		    	centralni.add(dodajLek, BorderLayout.CENTER);
+		    } 
+		});
+		
 		JButton btnIzmena= new JButton("Izmeni lek");
 		dugmici.add(btnIzmena);
 		btnIzmena.setBackground(new Color(77,77,77));	//promenjena pozadina dugmeta
@@ -112,7 +125,7 @@ public class FrameLekovi1 extends JFrame {
 		
 		dugmici.add(menuSort);
 		
-		LekoviTabela tblLekovi= new LekoviTabela();
+		tblLekovi= new LekoviTabela();
 		
 		
 		centralni.add(tblLekovi, BorderLayout.CENTER);
@@ -167,7 +180,18 @@ public class FrameLekovi1 extends JFrame {
 	}
 		
 		
-	
+	class DodajLek extends JPanel{
+		
+		public DodajLek() {
+			
+			
+			JButton btnDodavanje= new JButton("Dodaj lek");
+			this.add(btnDodavanje);
+			btnDodavanje.setBackground(new Color(77,77,77));	//promenjena pozadina dugmeta
+			btnDodavanje.setForeground(Color.WHITE);
+		}
+		
+	}
 
 	}
 
