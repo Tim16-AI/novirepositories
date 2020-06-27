@@ -18,7 +18,7 @@ public class Main {
 			
 			switch (param) {
 			
-			case 1: FrameLogin1 frame = new FrameLogin1();
+			case 1:  FrameLogin1 frame = new FrameLogin1();
 			frame.setVisible(true);
 			break;
 			
@@ -30,10 +30,10 @@ public class Main {
 			frameL2.setVisible(true);
 			break;
 			
-			/*case 4: FrameLekovi3 frameL3= new FrameLekovi3();
+		case 4: FrameLekovi3 frameL3= new FrameLekovi3();
 			frameL3.setVisible(true);
 			break;
-			*/
+			
 			case 5: FrameLekovi4 frameL4= new FrameLekovi4();
 			frameL4.setVisible(true);
 			break;
@@ -76,6 +76,10 @@ public class Main {
 			
 			case 15: FrameIzvestaj3 frameI3= new FrameIzvestaj3();
 			frameI3.setVisible(true);
+			break;
+			
+			case 16: Frame frameI5= new Frame();
+			frameI5.setVisible(true);
 			break;
 			
 			default:

@@ -1,5 +1,7 @@
 package gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,14 +16,45 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import java.util.LinkedList;
 
 import gui.FrameKupovina1.ImagePanel;
 
-public class FrameLogin1 extends JFrame{
+public class FrameLogin1 extends JPanel{
 	
 	public FrameLogin1 () {
 		
-		Toolkit kit = Toolkit.getDefaultToolkit();
+		LinkedList<Korisnik> korisnici = new LinkedList<Korisnik>();
+		
+		Korisnik k = new Korisnik();
+		k.Ime = "David";
+		k.Prezime = "Antunovic";
+		k.KorisnickoIme = "Dave";
+		k.Lozinka = "123";
+		k.Tip = "Administrator";
+		
+		korisnici.add(k);
+		
+		Korisnik k1 = new Korisnik();
+		k1.Ime = "Teodora";
+		k1.Prezime = "Petkovic";
+		k1.KorisnickoIme = "Tea";
+		k1.Lozinka = "123";
+		k1.Tip = "Lekar";
+		
+		korisnici.add(k1);
+		
+		Korisnik k2 = new Korisnik();
+		k2.Ime = "Olga";
+		k2.Prezime = "Petkovic";
+		k2.KorisnickoIme = "Olga";
+		k2.Lozinka = "123";
+		k2.Tip = "Apotekar";
+		
+		korisnici.add(k2);
+		
+		
+		/*Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
         int screenHeight = screenSize.height;
         int screenWidth = screenSize.width;
@@ -84,34 +117,64 @@ public class FrameLogin1 extends JFrame{
 		naslov.add(lblNaslov);
 		
 		JPanel prozor= new JPanel();
-		glavniProzor.add(prozor, BorderLayout.CENTER);
+		glavniProzor.add(prozor, BorderLayout.CENTER);*/
 		
-		prozor.setLayout(new BoxLayout(prozor, BoxLayout.Y_AXIS));
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		
 	    JLabel lblIme= new JLabel("Korisnicko ime");
-		prozor.add(lblIme);
+	    this.add(lblIme);
 		    
-		JTextField txtIme= new JTextField("                              ");
-		prozor.add(txtIme);
+		JTextField txtIme= new JTextField("");
+		this.add(txtIme);
 		
 		JLabel lblSifra= new JLabel("Lozinka");
-		prozor.add(lblSifra);
+		this.add(lblSifra);
 		    
-		JTextField txtSifra= new JTextField("                              ");
-		prozor.add(txtSifra);
+		JTextField txtSifra= new JTextField("");
+		this.add(txtSifra);
 		
 		JLabel lblTip= new JLabel("Tip korisnika");
-		prozor.add(lblTip);
+		this.add(lblTip);
 		    
-		JTextField txtTip= new JTextField("                              ");
-		prozor.add(txtTip);
+		JTextField txtTip= new JTextField("");
+		this.add(txtTip);
 		
 		JLabel lblRazmak= new JLabel(" ");
-		prozor.add(lblRazmak);
+		this.add(lblRazmak);
 		
 		JButton btnPrijava= new JButton("Prijava");
-		prozor.add(btnPrijava);
+		btnPrijava.addActionListener(new ActionListener() { 
+		    public void actionPerformed(ActionEvent e) { 
+		    	for(Korisnik kor : korisnici){
+		    		String kime = txtIme.getText();
+		    		String loz = txtSifra.getText();
+		    		
+		    		String korIme = kor.KorisnickoIme;
+		    		String lozinka = kor.Lozinka;
+		    		
+		    		if(korIme.equals(kime) && lozinka.equals(loz)) {
+		    			if(kor.Tip.equals("Lekar")) {
+		    			FrameLekovi1 frameL1= new FrameLekovi1 ();
+		    			frameL1.setVisible(true);
+		    			}
+		    			
+		    			if(kor.Tip.equals("Apotekar")) {
+		    			 FrameRecepti3 frameR3= new FrameRecepti3();
+		    			frameR3.setVisible(true);
+		    			
+			    			}
+		    			
+		    			if(kor.Tip.equals("Administrator")) {
+		    				FrameIzvestaj1 frameI1= new FrameIzvestaj1();
+		    				frameI1.setVisible(true);
+			    			
+				    			}
+		    		}
+		    	}
+		    } 
+		});
+		this.add(btnPrijava);
 		
 	}
 	

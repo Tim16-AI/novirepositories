@@ -63,6 +63,12 @@ public class Frame extends JFrame {
 		JLabel lblNaslov=new JLabel("Informacioni sistem apoteke");
 		lblNaslov.setPreferredSize(new Dimension(500, 90));
 		naslov.add(lblNaslov);
+		
+		FrameLogin1 centralni= new FrameLogin1();
+		
+	
+		glavniProzor.add(centralni, BorderLayout.CENTER);
+		
 	    
 	}
 	
