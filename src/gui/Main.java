@@ -30,7 +30,7 @@ public class Main {
 			frameL2.setVisible(true);
 			break;
 			
-		case 4: FrameLekovi3 frameL3= new FrameLekovi3();
+		    case 4: FrameLekovi3 frameL3= new FrameLekovi3();
 			frameL3.setVisible(true);
 			break;
 			
@@ -54,9 +54,9 @@ public class Main {
 			frameK1.setVisible(true);
 			break;
 			
-			/*case 10: FrameKorisnici2 frameK2= new FrameKorisnici2();
+			case 10: FrameKorisnici2 frameK2= new FrameKorisnici2();
 			frameK2.setVisible(true);
-			break;*/
+			break;
 			
 			case 11: FrameKupovina1 frameK3= new FrameKupovina1();
 			frameK3.setVisible(true);
