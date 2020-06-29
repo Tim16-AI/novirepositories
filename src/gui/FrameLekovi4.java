@@ -131,11 +131,8 @@ public class FrameLekovi4 extends JPanel {
 		JLabel lblNaziv= new JLabel("Naziv leka");
 	    stavka1.add(lblNaziv);
 	    
-	    JTextField txtNaziv= new JTextField("                              ");
+	    JTextField txtNaziv= new JTextField("");
 	    stavka1.add(txtNaziv);
-	    
-	    JButton btnDalje2= new JButton("Dalje");
-	    stavka1.add(btnDalje2);
 	    
 	    JPanel stavka2= new JPanel();
 	    dodavanje.add(stavka2);
@@ -143,12 +140,8 @@ public class FrameLekovi4 extends JPanel {
 	    JLabel lblProizvodjac= new JLabel("Proizvodjac");
 	    stavka2.add(lblProizvodjac);
 	    
-	    JTextField txtProizvodjac= new JTextField("                              ");
+	    JTextField txtProizvodjac= new JTextField("");
 	    stavka2.add(txtProizvodjac);
-	    
-	    JButton btnDalje3= new JButton("Dalje");
-	    stavka2.add(btnDalje3);
-	    
 	    
 	    JPanel stavka3= new JPanel();
 	    dodavanje.add(stavka3);
@@ -156,11 +149,9 @@ public class FrameLekovi4 extends JPanel {
 	    JLabel lblRecept= new JLabel("Recept");
 	    stavka3.add(lblRecept);
 	    
-	    JTextField txtRecept= new JTextField("                              ");
+	    JTextField txtRecept= new JTextField("");
 	    stavka3.add(txtRecept);
 	    
-	    JButton btnDalje4= new JButton("Dalje");
-	    stavka3.add(btnDalje4);
 	    
 	    JPanel stavka4= new JPanel();
 	    dodavanje.add(stavka4);
@@ -168,11 +159,8 @@ public class FrameLekovi4 extends JPanel {
 	    JLabel lblCena= new JLabel("Cena");
 	    stavka4.add(lblCena);
 	    
-	    JTextField txtCena= new JTextField("                              ");
+	    JTextField txtCena= new JTextField("");
 	    stavka4.add(txtCena);
-	    
-	    JButton btnDalje5= new JButton("Dalje");
-	    stavka4.add(btnDalje5);
 	    
 	    JPanel dugmad= new JPanel();
 	    dodavanje.add(dugmad);

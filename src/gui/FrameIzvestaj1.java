@@ -74,21 +74,32 @@ public class FrameIzvestaj1 extends JPanel {
 		JPanel dugmici= new JPanel();
 		this.add(dugmici, BorderLayout.NORTH);
 		
-		JButton btnPrikaz= new JButton("Ukupna prodaja svih lekova");
+		JButton btnPrikaz= new JButton("<html>Ukupna prodaja<br/> svih lekova</html>");
 		dugmici.add(btnPrikaz);
 		btnPrikaz.setBackground(new Color(77,77,77));	//promenjena pozadina dugmeta
 		btnPrikaz.setForeground(Color.WHITE);
 		
 		
-		JButton btnDodavanje= new JButton("Ukupna prodaja svih lekova odabranog prozivodjaca");
+		JButton btnDodavanje= new JButton ("<html>Ukupna prodaja svih lekova<br/> odabranog prozivodjaca</html>");
 		dugmici.add(btnDodavanje);
 		btnDodavanje.setBackground(new Color(77,77,77));	//promenjena pozadina dugmeta
 		btnDodavanje.setForeground(Color.WHITE);
 		
+		
+		JButton btnProdaja= new JButton ("<html>Ukupna prodaja svih lekova<br/> koje je odredjeni apotekar prodao</html>");
+		dugmici.add(btnProdaja);
+		btnProdaja.setBackground(new Color(77,77,77));	//promenjena pozadina dugmeta
+		btnProdaja.setForeground(Color.WHITE);
+
+
+		
+		
+
+		
 		///////////////////////////////////////////////////////////////////////////////////
 		//ne radi padajuci meni
 		
-		JMenu menuSort= new JMenu("Ukupna prodaja svih lekova koje je odredjeni apotekar prodao");
+		JMenu menuSort= new JMenu("Sortiraj po:");
 		menuSort.setBackground(new Color(77,77,77));	//promenjena pozadina dugmeta
 		menuSort.setForeground(Color.WHITE);
 		

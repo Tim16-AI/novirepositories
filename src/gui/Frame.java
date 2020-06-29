@@ -22,7 +22,7 @@ public class Frame extends JFrame {
 	FrameLekovi1 prikazLekovaPanel;
 	FrameKorisnici1 prikazKorisnikaPanel;
 	FrameRecepti1 prikazRecepataPanel;
-	//FrameIzvestaj1 prikazIzvestaja;
+	FrameIzvestaj1 prikazIzvestaja;
 	FrameKupovina1 prikazKupovinaPanel;
 	
 	JPanel glavniProzor;
@@ -40,7 +40,7 @@ public class Frame extends JFrame {
 		prikazLekovaPanel = new FrameLekovi1(this);
 		prikazKorisnikaPanel = new FrameKorisnici1(korisnici);
 		prikazRecepataPanel = new FrameRecepti1();
-		//prikazIzvestaja = new FrameIzvestaj1();
+		prikazIzvestaja = new FrameIzvestaj1();
 		prikazKupovinaPanel= new FrameKupovina1();
 		
 		
@@ -148,7 +148,7 @@ public class Frame extends JFrame {
 		glavniProzor.remove(prikazKorisnikaPanel);
 		glavniProzor.remove(prikazKupovinaPanel);
 		glavniProzor.remove(prikazRecepataPanel);
-		//glavniProzor.remove(prikazIzvestaja);
+		glavniProzor.remove(prikazIzvestaja);
 		
 		
 		glavniProzor.add(prikazLekovaPanel);
@@ -166,7 +166,7 @@ public class Frame extends JFrame {
 		glavniProzor.remove(prikazLekovaPanel);
 		glavniProzor.remove(prikazKupovinaPanel);
 		glavniProzor.remove(prikazRecepataPanel);
-		//glavniProzor.remove(prikazIzvestaja);
+		glavniProzor.remove(prikazIzvestaja);
 		
 		glavniProzor.add(prikazKorisnikaPanel);
 		
@@ -183,7 +183,7 @@ public class Frame extends JFrame {
 		glavniProzor.remove(prikazKorisnikaPanel);
 		glavniProzor.remove(prikazKupovinaPanel);
 		glavniProzor.remove(prikazLekovaPanel);
-		//glavniProzor.remove(prikazIzvestaja);
+		glavniProzor.remove(prikazIzvestaja);
 		
 		glavniProzor.add(prikazRecepataPanel);
 		
@@ -200,7 +200,7 @@ public class Frame extends JFrame {
 		glavniProzor.remove(prikazKorisnikaPanel);
 		glavniProzor.remove(prikazLekovaPanel);
 		glavniProzor.remove(prikazRecepataPanel);
-		//glavniProzor.remove(prikazIzvestaja);
+		glavniProzor.remove(prikazIzvestaja);
 		
 		glavniProzor.add(prikazKupovinaPanel);
 		
@@ -219,7 +219,7 @@ public class Frame extends JFrame {
 		glavniProzor.remove(prikazRecepataPanel);
 		glavniProzor.remove(prikazLekovaPanel);
 		
-		//glavniProzor.add(prikazIzvestajaPanel);
+		glavniProzor.add(prikazIzvestaja);
 		
 		glavniProzor.revalidate();
 		glavniProzor.repaint();
