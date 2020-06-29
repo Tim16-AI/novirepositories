@@ -20,12 +20,12 @@ import javax.swing.JTextField;
 
 import gui.Frame.ImagePanel;
 
-public class FrameKupovina1 extends JFrame {
+public class FrameKupovina1 extends JPanel {
 	
  
     public FrameKupovina1 ()  {
 		
-		Toolkit kit = Toolkit.getDefaultToolkit();
+		/*Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
         int screenHeight = screenSize.height;
         int screenWidth = screenSize.width;
@@ -69,11 +69,13 @@ public class FrameKupovina1 extends JFrame {
 		///////////////////////////////////////////////////////////////////////////////
 		
 		JPanel centralni= new JPanel();
-		centralni.setLayout(new BoxLayout(centralni, BoxLayout.Y_AXIS));
-		glavniProzor.add(centralni, BorderLayout.CENTER);
+		
+		glavniProzor.add(centralni, BorderLayout.CENTER);*/
+    	
+    	this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		JPanel stavka1= new JPanel();
-		centralni.add(stavka1);
+		this.add(stavka1);
 		
 			
 	    JLabel lblSifra1= new JLabel("Sifra leka");
@@ -84,7 +86,7 @@ public class FrameKupovina1 extends JFrame {
 		
 		
 		JPanel stavka2= new JPanel();
-		centralni.add(stavka2);
+		this.add(stavka2);
 			
 	    JLabel lblSifra2= new JLabel("Sifra recepta");
 		stavka1.add(lblSifra2);
@@ -93,7 +95,7 @@ public class FrameKupovina1 extends JFrame {
 		stavka1.add(txtSifra2);
 		
 		JPanel dugmici= new JPanel();
-		centralni.add(dugmici);
+		this.add(dugmici);
 		
 		JButton btnDodaj= new JButton("+");
 		dugmici.add(btnDodaj);
@@ -104,10 +106,10 @@ public class FrameKupovina1 extends JFrame {
 		
 		Korpa tblKorpa= new Korpa();
 		
-		centralni.add(tblKorpa);
+		this.add(tblKorpa);
 		
 		JPanel racun= new JPanel();
-		centralni.add(racun);
+		this.add(racun);
 		
 		JLabel lblRacun= new JLabel("Racun");
 		racun.add(lblRacun);
@@ -157,7 +159,7 @@ public class FrameKupovina1 extends JFrame {
 			Object[] columns = new Object[] { "Ime leka", "Proizvodjac", "Sifra", "Recept", "Cena u dinarima"};
 
 			Object[][] data = { { "Brufen", "Famar SA", "835294", "Ne", "100" },
-					{ "Kafetin", "АЛКАЛОИД АД-Скопје", "645789", "Ne", "130" },
+					{ "Kafetin", "Ð�Ð›ÐšÐ�Ð›ÐžÐ˜Ð” Ð�Ð”-Ð¡ÐºÐ¾Ð¿Ñ˜Ðµ", "645789", "Ne", "130" },
 				 };
 
 			tblKorpa = new JTable(data, columns);

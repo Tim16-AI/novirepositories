@@ -21,16 +21,27 @@ import javax.swing.JTable;
 
 import gui.Frame.ImagePanel;
 
-public class FrameLekovi1 extends JFrame {
+import java.util.LinkedList;
+
+public class FrameLekovi1 extends JPanel {
 	
 	LekoviTabela tblLekovi;
-	DodajLek dodajLek;
- 
-    public FrameLekovi1 ()  {
+	FrameLekovi3 dodajLek;
+	FrameLekovi2 pretragaPanel;
+	FrameLekovi4 izmenaPanel;
+	
+	LinkedList<Lek> lekovi;
+	
+    public FrameLekovi1 (Frame mainFrame)  {
 		
-    	dodajLek = new DodajLek();
+    	lekovi = new LinkedList<Lek>();
     	
-		Toolkit kit = Toolkit.getDefaultToolkit();
+    	dodajLek = new FrameLekovi3(this);
+    	tblLekovi= new LekoviTabela();
+    	pretragaPanel = new FrameLekovi2();
+    	izmenaPanel = new FrameLekovi4();
+    	
+		/*Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
         int screenHeight = screenSize.height;
         int screenWidth = screenSize.width;
@@ -72,31 +83,45 @@ public class FrameLekovi1 extends JFrame {
 		naslov.add(lblNaslov);
 		
 		JPanel centralni= new JPanel();
-		centralni.setLayout(new BorderLayout(20, 20));
-		glavniProzor.add(centralni, BorderLayout.CENTER);
+		
+		glavniProzor.add(centralni, BorderLayout.CENTER);*/
+		
+		this.setLayout(new BorderLayout(20, 20));
 		
 		JPanel dugmici= new JPanel();
-		centralni.add(dugmici, BorderLayout.NORTH);
+		this.add(dugmici, BorderLayout.NORTH);
 		
 		JButton btnPrikaz= new JButton("Prikaz");
 		dugmici.add(btnPrikaz);
 		btnPrikaz.setBackground(new Color(77,77,77));	//promenjena pozadina dugmeta
 		btnPrikaz.setForeground(Color.WHITE);
 		
+		btnPrikaz.addActionListener(new ActionListener() { 
+		    public void actionPerformed(ActionEvent e) { 
+		    	PrikazLekova();
+		    } 
+		});
+		
 		JButton btnPretraga= new JButton("Pretraga");
 		dugmici.add(btnPretraga);
 		btnPretraga.setBackground(new Color(77,77,77));	//promenjena pozadina dugmeta
 		btnPretraga.setForeground(Color.WHITE);
+		
+		btnPretraga.addActionListener(new ActionListener() { 
+		    public void actionPerformed(ActionEvent e) { 
+		    	PrikazPretrage();
+		    } 
+		});
 		
 		JButton btnDodavanje= new JButton("Dodaj lek");
 		dugmici.add(btnDodavanje);
 		btnDodavanje.setBackground(new Color(77,77,77));	//promenjena pozadina dugmeta
 		btnDodavanje.setForeground(Color.WHITE);
 		
+		
 		btnDodavanje.addActionListener(new ActionListener() { 
 		    public void actionPerformed(ActionEvent e) { 
-		    	centralni.remove(tblLekovi);
-		    	centralni.add(dodajLek, BorderLayout.CENTER);
+		    	PrikazDodavanja();
 		    } 
 		});
 		
@@ -104,6 +129,12 @@ public class FrameLekovi1 extends JFrame {
 		dugmici.add(btnIzmena);
 		btnIzmena.setBackground(new Color(77,77,77));	//promenjena pozadina dugmeta
 		btnIzmena.setForeground(Color.WHITE);
+		
+		btnIzmena.addActionListener(new ActionListener() { 
+		    public void actionPerformed(ActionEvent e) { 
+		    	PrikazIzmene();
+		    } 
+		});
 		
 		///////////////////////////////////////////////////////////////////////////////////
 		//ne radi padajuci meni
@@ -125,15 +156,63 @@ public class FrameLekovi1 extends JFrame {
 		
 		dugmici.add(menuSort);
 		
-		tblLekovi= new LekoviTabela();
 		
-		
-		centralni.add(tblLekovi, BorderLayout.CENTER);
+		this.add(tblLekovi, BorderLayout.CENTER);
 		
 	    
 	}
 	
+    public void DodajLek(Lek lek) {
+    	lekovi.add(lek);
+    	
+    	//osvezi data taele za prikaz lekova
+    	
+    	PrikazLekova();
+    }
+    
+    
+    private void PrikazLekova() {
+    	this.remove(dodajLek);
+    	this.remove(pretragaPanel);
+    	this.remove(izmenaPanel);
+    	
+    	this.add(tblLekovi, BorderLayout.CENTER);
+    	
+    	this.revalidate();
+    	this.repaint();
+    }
+    
+	private void PrikazDodavanja() {
+		this.remove(tblLekovi);
+		this.remove(pretragaPanel);
+		this.remove(izmenaPanel);
+    	this.add(dodajLek, BorderLayout.CENTER);
+    	
+    	this.revalidate();
+    	this.repaint();
+	}
 	
+	private void PrikazIzmene() {
+		this.remove(tblLekovi);
+		this.remove(pretragaPanel);
+		this.remove(dodajLek);
+		
+    	this.add(izmenaPanel, BorderLayout.CENTER);
+    	
+    	this.revalidate();
+    	this.repaint();
+	}
+	
+	 private void PrikazPretrage() {
+	    	this.remove(dodajLek);
+	    	this.remove(tblLekovi);
+	    	this.remove(izmenaPanel);
+	    	this.add(pretragaPanel, BorderLayout.CENTER);
+	    	
+	    	this.revalidate();
+	    	this.repaint();
+	    }
+    
 	class ImagePanel extends JPanel {
 
 		  private Image img;
@@ -172,26 +251,13 @@ public class FrameLekovi1 extends JFrame {
 			Object[] columns = new Object[] { "Ime leka", "Proizvodjac", "Sifra", "Recept", "Cena u dinarima"};
 
 			Object[][] data = { { "Brufen", "Famar SA", "835294", "Ne", "100" },
-					{ "Kafetin", "АЛКАЛОИД АД-Скопје", "645789", "Ne", "130" },
+					{ "Kafetin", "Ð�Ð›ÐšÐ�Ð›ÐžÐ˜Ð” Ð�Ð”-Ð¡ÐºÐ¾Ð¿Ñ˜Ðµ", "645789", "Ne", "130" },
 				 };
 
 		   tblLekovi = new JTable(data, columns);
 		}
 	}
-		
-		
-	class DodajLek extends JPanel{
-		
-		public DodajLek() {
-			
-			
-			JButton btnDodavanje= new JButton("Dodaj lek");
-			this.add(btnDodavanje);
-			btnDodavanje.setBackground(new Color(77,77,77));	//promenjena pozadina dugmeta
-			btnDodavanje.setForeground(Color.WHITE);
-		}
-		
-	}
+	
 
-	}
+}
 

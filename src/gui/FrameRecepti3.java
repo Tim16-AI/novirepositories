@@ -20,11 +20,11 @@ import javax.swing.JTextField;
 
 import gui.Frame.ImagePanel;
 
-public class FrameRecepti3 extends JFrame{
+public class FrameRecepti3 extends JPanel{
 	
 	public FrameRecepti3 () {
 		
-		Toolkit kit = Toolkit.getDefaultToolkit();
+		/*Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
         int screenHeight = screenSize.height;
         int screenWidth = screenSize.width;
@@ -66,11 +66,13 @@ public class FrameRecepti3 extends JFrame{
 		naslov.add(lblNaslov);
 		
 		JPanel centralni= new JPanel();
-		centralni.setLayout(new BorderLayout(20, 20));
-		glavniProzor.add(centralni, BorderLayout.CENTER);
+		
+		glavniProzor.add(centralni, BorderLayout.CENTER);*/
+		
+		this.setLayout(new BorderLayout(20, 20));
 		
 		JPanel dugmici= new JPanel();
-		centralni.add(dugmici, BorderLayout.NORTH);
+		this.add(dugmici, BorderLayout.NORTH);
 		
 		JButton btnPrikaz= new JButton("Postojeci recepti");
 		dugmici.add(btnPrikaz);
@@ -110,7 +112,7 @@ public class FrameRecepti3 extends JFrame{
 		
         JPanel dodavanje= new JPanel();
 		dodavanje.setLayout(new BoxLayout(dodavanje, BoxLayout.Y_AXIS));
-		centralni.add(dodavanje, BorderLayout.CENTER);
+		this.add(dodavanje, BorderLayout.CENTER);
 		
 		JLabel lblId= new JLabel("Idebtifikator leka");
 	    dodavanje.add(lblId);
@@ -159,11 +161,11 @@ public class FrameRecepti3 extends JFrame{
 	    dugmad.add(btnOtkazi);
 	    
 	    JPanel dolePrazno= new JPanel();
-	    centralni.add(dolePrazno, BorderLayout.SOUTH);
+	    this.add(dolePrazno, BorderLayout.SOUTH);
 	    
 	    
-	   int centralniSirina= centralni.getWidth();
-	   int centralniVisina= centralni.getHeight();
+	   int centralniSirina= this.getWidth();
+	   int centralniVisina= this.getHeight();
 	   Dimension doleP= new Dimension(centralniSirina, centralniVisina/5);
 	    
 	    dolePrazno.setSize(doleP);

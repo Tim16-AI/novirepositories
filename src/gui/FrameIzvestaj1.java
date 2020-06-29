@@ -19,12 +19,12 @@ import javax.swing.JTable;
 
 import gui.Frame.ImagePanel;
 
-public class FrameIzvestaj1 extends JFrame {
+public class FrameIzvestaj1 extends JPanel {
 	
  
     public FrameIzvestaj1 ()  {
 		
-		Toolkit kit = Toolkit.getDefaultToolkit();
+		/*Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
         int screenHeight = screenSize.height;
         int screenWidth = screenSize.width;
@@ -66,11 +66,13 @@ public class FrameIzvestaj1 extends JFrame {
 		naslov.add(lblNaslov);
 		
 		JPanel centralni= new JPanel();
-		centralni.setLayout(new BorderLayout(20, 20));
-		glavniProzor.add(centralni, BorderLayout.CENTER);
 		
+		glavniProzor.add(centralni, BorderLayout.CENTER); */
+		
+    	this.setLayout(new BorderLayout(20, 20));
+    	
 		JPanel dugmici= new JPanel();
-		centralni.add(dugmici, BorderLayout.NORTH);
+		this.add(dugmici, BorderLayout.NORTH);
 		
 		JButton btnPrikaz= new JButton("Ukupna prodaja svih lekova");
 		dugmici.add(btnPrikaz);
@@ -106,7 +108,7 @@ public class FrameIzvestaj1 extends JFrame {
 		KorisniciTabela tblKorisnici= new KorisniciTabela();
 		
 		
-		centralni.add(tblKorisnici, BorderLayout.CENTER);
+		this.add(tblKorisnici, BorderLayout.CENTER);
 		
 	    
 	}

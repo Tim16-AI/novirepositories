@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -20,12 +22,15 @@ import javax.swing.JTextField;
 
 import gui.Frame.ImagePanel;
 
-public class FrameKorisnici2 extends JFrame {
+public class FrameKorisnici2 extends JPanel {
 	
-
-    public FrameKorisnici2 ()  {
+	FrameKorisnici1 frame;
+	
+    public FrameKorisnici2 (FrameKorisnici1 korisniciFrame)  {
 		
-		Toolkit kit = Toolkit.getDefaultToolkit();
+    	frame = korisniciFrame;
+    	
+		/*Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
         int screenHeight = screenSize.height;
         int screenWidth = screenSize.width;
@@ -68,10 +73,12 @@ public class FrameKorisnici2 extends JFrame {
 		
 		JPanel centralni= new JPanel();
 		centralni.setLayout(new BorderLayout(20, 20));
-		glavniProzor.add(centralni, BorderLayout.CENTER);
+		glavniProzor.add(centralni, BorderLayout.CENTER);*/
 		
-		JPanel dugmici= new JPanel();
-		centralni.add(dugmici, BorderLayout.NORTH);
+    	this.setLayout(new BorderLayout(20, 20));
+    	
+		/*JPanel dugmici= new JPanel();
+		this.add(dugmici, BorderLayout.NORTH);
 		
 		JButton btnPrikaz= new JButton("Prikaz");
 		dugmici.add(btnPrikaz);
@@ -102,11 +109,11 @@ public class FrameKorisnici2 extends JFrame {
 		menuSort.add(itTip);
 		menuSort.addSeparator();
 		
-		dugmici.add(menuSort);
+		dugmici.add(menuSort);*/
 		
 		JPanel dodavanje= new JPanel();
 		dodavanje.setLayout(new BoxLayout(dodavanje, BoxLayout.Y_AXIS));
-		centralni.add(dodavanje, BorderLayout.CENTER);
+		this.add(dodavanje, BorderLayout.CENTER);
 		
 		JLabel lblKime= new JLabel("Korisnicko ime");
 	    dodavanje.add(lblKime);
@@ -145,15 +152,35 @@ public class FrameKorisnici2 extends JFrame {
 	    JButton btnDodaj= new JButton("Dodaj");
 	    dugmad.add(btnDodaj);
 	    
+	    btnDodaj.addActionListener(new ActionListener() { 
+		    public void actionPerformed(ActionEvent e) { 
+		    	String korisnickoIme = txtKime.getText();
+		    	String lozinka = txtLozinka.getText();
+		    	String ime = txtIme.getText();
+		    	String prezime = txtPrez.getText();
+		    	String tip = txtTip.getText();
+		    	
+		    	Korisnik korisnik = new Korisnik();
+		    	
+		    	korisnik.Ime = ime;
+		    	korisnik.Prezime = prezime;
+		    	korisnik.KorisnickoIme = korisnickoIme;
+		    	korisnik.Lozinka = lozinka;
+		    	korisnik.Tip = tip;
+		    	
+		    	frame.DodajKorisnika(korisnik);
+		    } 
+		});
+	    
 	    JButton btnOtkazi= new JButton("Otkazi");
 	    dugmad.add(btnOtkazi);
 	    
 	    JPanel dolePrazno= new JPanel();
-	    centralni.add(dolePrazno, BorderLayout.SOUTH);
+	    this.add(dolePrazno, BorderLayout.SOUTH);
 	    
 	    
-	   int centralniSirina= centralni.getWidth();
-	   int centralniVisina= centralni.getHeight();
+	   int centralniSirina= this.getWidth();
+	   int centralniVisina= this.getHeight();
 	   Dimension doleP= new Dimension(centralniSirina, centralniVisina/5);
 	    
 	    dolePrazno.setSize(doleP);
@@ -199,7 +226,7 @@ public class FrameKorisnici2 extends JFrame {
 			Object[] columns = new Object[] { "Ime leka", "Proizvodjac", "Sifra", "Recept", "Cena u dinarima"};
 
 			Object[][] data = { { "Brufen", "Famar SA", "835294", "Ne", "100" },
-					{ "Kafetin", "АЛКАЛОИД АД-Скопје", "645789", "Ne", "130" },
+					{ "Kafetin", "Ð�Ð›ÐšÐ�Ð›ÐžÐ˜Ð” Ð�Ð”-Ð¡ÐºÐ¾Ð¿Ñ˜Ðµ", "645789", "Ne", "130" },
 				 };
 
 		   tblLekovi = new JTable(data, columns);

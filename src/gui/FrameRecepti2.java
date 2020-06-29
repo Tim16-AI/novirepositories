@@ -20,11 +20,11 @@ import javax.swing.JTextField;
 
 import gui.Frame.ImagePanel;
 
-public class FrameRecepti2 extends JFrame{
+public class FrameRecepti2 extends JPanel{
 	
 	public FrameRecepti2 () {
 		
-		Toolkit kit = Toolkit.getDefaultToolkit();
+		/*Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
         int screenHeight = screenSize.height;
         int screenWidth = screenSize.width;
@@ -66,11 +66,13 @@ public class FrameRecepti2 extends JFrame{
 		naslov.add(lblNaslov);
 		
 		JPanel centralni= new JPanel();
-		centralni.setLayout(new BorderLayout(20, 20));
-		glavniProzor.add(centralni, BorderLayout.CENTER);
+		
+		glavniProzor.add(centralni, BorderLayout.CENTER);*/
+		
+		this.setLayout(new BorderLayout(20, 20));
 		
 		JPanel dugmici= new JPanel();
-		centralni.add(dugmici, BorderLayout.NORTH);
+		this.add(dugmici, BorderLayout.NORTH);
 		
 		JButton btnPrikaz= new JButton("Postojeci recepti");
 		dugmici.add(btnPrikaz);
@@ -112,7 +114,7 @@ public class FrameRecepti2 extends JFrame{
         dugmici.add(menuSort);
 		
 		JPanel panPretraga= new JPanel();
-		centralni.add(panPretraga ,BorderLayout.CENTER);
+		this.add(panPretraga ,BorderLayout.CENTER);
 		
 		JTextField pretraga=new JTextField("Pretraga...              ");
 		 panPretraga.add(pretraga,BorderLayout.CENTER);  
@@ -121,10 +123,10 @@ public class FrameRecepti2 extends JFrame{
 		 panPretraga.add(btnOk, BorderLayout.CENTER);
 		 
 		  JPanel dolePrazno= new JPanel();
-		    centralni.add(dolePrazno, BorderLayout.SOUTH);
+		  this.add(dolePrazno, BorderLayout.SOUTH);
 		   
 		    
-		   int centralniSirina= centralni.getWidth();
+		   int centralniSirina= this.getWidth();
 		   //int centralniVisina= centralni.getHeight();
 		  
 		   dolePrazno.setPreferredSize(new Dimension(centralniSirina, 180));

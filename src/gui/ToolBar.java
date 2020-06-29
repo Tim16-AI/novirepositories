@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.GridLayout;
 
 import javax.swing.BoxLayout;
@@ -17,7 +19,7 @@ import java.awt.BorderLayout;
 
 public class ToolBar extends JToolBar{
 	
-	public ToolBar () {
+	public ToolBar (Frame mainFrame) {
 		
 		super(SwingConstants.VERTICAL);
         
@@ -35,6 +37,12 @@ public class ToolBar extends JToolBar{
 		btnKorisnici.setMinimumSize(minSize);
 		btnKorisnici.setMaximumSize(maxSize);
 		
+		btnKorisnici.addActionListener(new ActionListener() { 
+		    public void actionPerformed(ActionEvent e) { 
+		    	mainFrame.PrikazKorisnikaPanel();
+		    } 
+		});
+		
 		
 		JButton btnLekovi = new JButton("Lekovi");
 		btnLekovi.setIcon(new ImageIcon("slike/lekovi.png"));
@@ -45,6 +53,12 @@ public class ToolBar extends JToolBar{
 		btnLekovi.setMinimumSize(minSize);
 		btnLekovi.setMaximumSize(maxSize);
 		
+		btnLekovi.addActionListener(new ActionListener() { 
+		    public void actionPerformed(ActionEvent e) { 
+		    	mainFrame.PrikazLekovaPanel();
+		    } 
+		});
+		
 		JButton btnRecepti = new JButton("Recepti");
 		btnRecepti.setIcon(new ImageIcon("slike/recepti.png"));
 		add(btnRecepti);
@@ -53,6 +67,12 @@ public class ToolBar extends JToolBar{
 		btnRecepti.setPreferredSize(prefferedSize);
 		btnRecepti.setMinimumSize(minSize);
 		btnRecepti.setMaximumSize(maxSize);
+		
+		btnRecepti.addActionListener(new ActionListener() { 
+		    public void actionPerformed(ActionEvent e) { 
+		    	mainFrame.PrikazRecepataPanel();
+		    } 
+		});
 		
 		JButton btnKupovina = new JButton("Kupovina");
 		btnKupovina.setIcon(new ImageIcon("slike/kupovina.png"));
@@ -63,6 +83,12 @@ public class ToolBar extends JToolBar{
 		btnKupovina.setMinimumSize(minSize);
 		btnKupovina.setMaximumSize(maxSize);
 		
+		btnKupovina.addActionListener(new ActionListener() { 
+		    public void actionPerformed(ActionEvent e) { 
+		    	mainFrame.PrikazKupovinePanel();
+		    } 
+		});
+		
 		JButton btnIzvestaj = new JButton("Izvestaj");
 		btnIzvestaj.setIcon(new ImageIcon("slike/izvestaj.png"));
 		add(btnIzvestaj);
@@ -72,6 +98,10 @@ public class ToolBar extends JToolBar{
 		btnIzvestaj.setMinimumSize(minSize);
 		btnIzvestaj.setMaximumSize(maxSize);
 		
-		
+		btnIzvestaj.addActionListener(new ActionListener() { 
+		    public void actionPerformed(ActionEvent e) { 
+		    	mainFrame.PrikazIzvestajaPanel();
+		    } 
+		});
 	}
 }

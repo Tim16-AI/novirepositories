@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -20,12 +22,12 @@ import javax.swing.JTextField;
 
 import gui.Frame.ImagePanel;
 
-public class FrameLekovi3 extends JFrame {
+public class FrameLekovi3 extends JPanel {
 	
 
-    public FrameLekovi3 ()  {
+    public FrameLekovi3 (FrameLekovi1 frame)  {
 		
-		Toolkit kit = Toolkit.getDefaultToolkit();
+		/*Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
         int screenHeight = screenSize.height;
         int screenWidth = screenSize.width;
@@ -67,11 +69,13 @@ public class FrameLekovi3 extends JFrame {
 		naslov.add(lblNaslov);
 		
 		JPanel centralni= new JPanel();
-		centralni.setLayout(new BorderLayout(20, 20));
-		glavniProzor.add(centralni, BorderLayout.CENTER);
 		
-		JPanel dugmici= new JPanel();
-		centralni.add(dugmici, BorderLayout.NORTH);
+		glavniProzor.add(centralni, BorderLayout.CENTER);*/
+		
+    	this.setLayout(new BorderLayout(20, 20));
+    	
+		/*JPanel dugmici= new JPanel();
+		this.add(dugmici, BorderLayout.NORTH);
 		
 		JButton btnPrikaz= new JButton("Prikaz");
 		dugmici.add(btnPrikaz);
@@ -111,11 +115,11 @@ public class FrameLekovi3 extends JFrame {
 		menuSort.add(itCena);
 		menuSort.addSeparator();
 		
-		dugmici.add(menuSort);
+		dugmici.add(menuSort);*/
 		
 		JPanel dodavanje= new JPanel();
 		dodavanje.setLayout(new BoxLayout(dodavanje, BoxLayout.Y_AXIS));
-		centralni.add(dodavanje, BorderLayout.CENTER);
+		this.add(dodavanje, BorderLayout.CENTER);
 		
 		JLabel lblNaziv= new JLabel("Naziv leka");
 	    dodavanje.add(lblNaziv);
@@ -154,15 +158,35 @@ public class FrameLekovi3 extends JFrame {
 	    JButton btnPotvrda= new JButton("Potvrda");
 	    dugmad.add(btnPotvrda);
 	    
+	    btnPotvrda.addActionListener(new ActionListener() { 
+		    public void actionPerformed(ActionEvent e) { 
+		    	String naziv = txtNaziv.getText();
+		    	String proizvodjac = txtProizvodjac.getText();
+		    	String sifra = txtSifra.getText();
+		    	String recept = txtRecept.getText();
+		    	String cena = txtCena.getText();
+		    	
+		    	Lek lek = new Lek();
+		    	
+		    	lek.Ime = naziv;
+		    	lek.Proizvodjac = proizvodjac;
+		    	lek.Sifra = sifra;
+		    	lek.NaRecept = Boolean.valueOf(recept);
+		    	lek.Cena = Float.valueOf(cena);
+		    	
+		    	frame.DodajLek(lek);
+		    } 
+		});
+	    
 	    JButton btnOtkazi= new JButton("Otkazi");
 	    dugmad.add(btnOtkazi);
 	    
 	    JPanel dolePrazno= new JPanel();
-	    centralni.add(dolePrazno, BorderLayout.SOUTH);
+	    this.add(dolePrazno, BorderLayout.SOUTH);
 	    
 	    
-	   int centralniSirina= centralni.getWidth();
-	   int centralniVisina= centralni.getHeight();
+	   int centralniSirina= this.getWidth();
+	   int centralniVisina= this.getHeight();
 	   Dimension doleP= new Dimension(centralniSirina, centralniVisina/5);
 	    
 	    dolePrazno.setSize(doleP);
@@ -208,7 +232,7 @@ public class FrameLekovi3 extends JFrame {
 			Object[] columns = new Object[] { "Ime leka", "Proizvodjac", "Sifra", "Recept", "Cena u dinarima"};
 
 			Object[][] data = { { "Brufen", "Famar SA", "835294", "Ne", "100" },
-					{ "Kafetin", "АЛКАЛОИД АД-Скопје", "645789", "Ne", "130" },
+					{ "Kafetin", "Ð�Ð›ÐšÐ�Ð›ÐžÐ˜Ð” Ð�Ð”-Ð¡ÐºÐ¾Ð¿Ñ˜Ðµ", "645789", "Ne", "130" },
 				 };
 
 		   tblLekovi = new JTable(data, columns);

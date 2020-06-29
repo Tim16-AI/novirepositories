@@ -1,4 +1,4 @@
-package gui;
+/*package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -160,4 +160,4 @@ public class FrameIzvestaj2 extends JFrame {
 		
 	
 
-	}
+	}*/

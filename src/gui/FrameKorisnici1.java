@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -19,12 +21,23 @@ import javax.swing.JTable;
 
 import gui.Frame.ImagePanel;
 
-public class FrameKorisnici1 extends JFrame {
+import java.util.HashMap;
+import java.util.LinkedList;
+
+public class FrameKorisnici1 extends JPanel {
 	
- 
-    public FrameKorisnici1 ()  {
+	KorisniciTabela tblKorisnici;
+	FrameKorisnici2 dodajKorisnikaPanel;
+	
+	LinkedList<Korisnik> korisnici;
+	
+    public FrameKorisnici1 (LinkedList<Korisnik> listaKorisnika)  {
 		
-		Toolkit kit = Toolkit.getDefaultToolkit();
+    	korisnici = listaKorisnika;
+    	
+    	dodajKorisnikaPanel = new FrameKorisnici2(this);
+    	
+		/*Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
         int screenHeight = screenSize.height;
         int screenWidth = screenSize.width;
@@ -66,22 +79,36 @@ public class FrameKorisnici1 extends JFrame {
 		naslov.add(lblNaslov);
 		
 		JPanel centralni= new JPanel();
-		centralni.setLayout(new BorderLayout(20, 20));
-		glavniProzor.add(centralni, BorderLayout.CENTER);
 		
+		glavniProzor.add(centralni, BorderLayout.CENTER);*/
+		
+    	this.setLayout(new BorderLayout(20, 20));
+    	
 		JPanel dugmici= new JPanel();
-		centralni.add(dugmici, BorderLayout.NORTH);
+		this.add(dugmici, BorderLayout.NORTH);
 		
 		JButton btnPrikaz= new JButton("Prikaz");
 		dugmici.add(btnPrikaz);
 		btnPrikaz.setBackground(new Color(77,77,77));	//promenjena pozadina dugmeta
 		btnPrikaz.setForeground(Color.WHITE);
 		
+		btnPrikaz.addActionListener(new ActionListener() { 
+		    public void actionPerformed(ActionEvent e) { 
+		    	PrikazKorisnika();
+		    } 
+		});
+		
 		
 		JButton btnDodavanje= new JButton("Dodaj korisnika");
 		dugmici.add(btnDodavanje);
 		btnDodavanje.setBackground(new Color(77,77,77));	//promenjena pozadina dugmeta
 		btnDodavanje.setForeground(Color.WHITE);
+		
+		btnDodavanje.addActionListener(new ActionListener() { 
+		    public void actionPerformed(ActionEvent e) { 
+		    	DodajKorisnikaPrikaz();
+		    } 
+		});
 		
 		///////////////////////////////////////////////////////////////////////////////////
 		//ne radi padajuci meni
@@ -103,15 +130,39 @@ public class FrameKorisnici1 extends JFrame {
 		
 		dugmici.add(menuSort);
 		
-		KorisniciTabela tblKorisnici= new KorisniciTabela();
+		tblKorisnici= new KorisniciTabela();
 		
 		
-		centralni.add(tblKorisnici, BorderLayout.CENTER);
+		this.add(tblKorisnici, BorderLayout.CENTER);
 		
 	    
 	}
 	
 	
+    public void DodajKorisnika(Korisnik korisnik) {
+    	korisnici.add(korisnik);
+    	
+    	//osveziti data tabele za prikaz
+    	
+    	PrikazKorisnika();
+    }
+    
+    private void PrikazKorisnika() {
+    	this.remove(dodajKorisnikaPanel);
+    	this.add(tblKorisnici, BorderLayout.CENTER);
+    	
+    	this.revalidate();
+    	this.repaint();
+    }
+    
+    private void DodajKorisnikaPrikaz() {
+    	this.remove(tblKorisnici);
+    	this.add(dodajKorisnikaPanel, BorderLayout.CENTER);
+    	
+    	this.revalidate();
+    	this.repaint();
+    }
+    
 	class ImagePanel extends JPanel {
 
 		  private Image img;
@@ -148,7 +199,11 @@ public class FrameKorisnici1 extends JFrame {
 		public void initTable() {
 			// Zaglavlja kolona
 			Object[] columns = new Object[] { "Korisnicko ime", "Lozinka", "Ime", "Prezime", " Tip Korisnika"};
-
+			
+			//Pogeldati za dodavanje korisnika iz liste
+			
+			
+			
 			Object[][] data = { { "rade01", "mirkairada", "Radislav", "Radojevic", "Lekar" },
 					{ "drmrprof", "kokakola", "Dragan", "Draganic", "Lekar" },
 				 };

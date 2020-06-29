@@ -22,38 +22,9 @@ import gui.FrameKupovina1.ImagePanel;
 
 public class FrameLogin1 extends JPanel{
 	
-	public FrameLogin1 () {
+	public FrameLogin1 (LinkedList<Korisnik> korisnici, Frame mainFrame) {
 		
-		LinkedList<Korisnik> korisnici = new LinkedList<Korisnik>();
-		
-		Korisnik k = new Korisnik();
-		k.Ime = "David";
-		k.Prezime = "Antunovic";
-		k.KorisnickoIme = "Dave";
-		k.Lozinka = "123";
-		k.Tip = "Administrator";
-		
-		korisnici.add(k);
-		
-		Korisnik k1 = new Korisnik();
-		k1.Ime = "Teodora";
-		k1.Prezime = "Petkovic";
-		k1.KorisnickoIme = "Tea";
-		k1.Lozinka = "123";
-		k1.Tip = "Lekar";
-		
-		korisnici.add(k1);
-		
-		Korisnik k2 = new Korisnik();
-		k2.Ime = "Olga";
-		k2.Prezime = "Petkovic";
-		k2.KorisnickoIme = "Olga";
-		k2.Lozinka = "123";
-		k2.Tip = "Apotekar";
-		
-		korisnici.add(k2);
-		
-		
+	
 		/*Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
         int screenHeight = screenSize.height;
@@ -146,32 +117,10 @@ public class FrameLogin1 extends JPanel{
 		JButton btnPrijava= new JButton("Prijava");
 		btnPrijava.addActionListener(new ActionListener() { 
 		    public void actionPerformed(ActionEvent e) { 
-		    	for(Korisnik kor : korisnici){
-		    		String kime = txtIme.getText();
-		    		String loz = txtSifra.getText();
-		    		
-		    		String korIme = kor.KorisnickoIme;
-		    		String lozinka = kor.Lozinka;
-		    		
-		    		if(korIme.equals(kime) && lozinka.equals(loz)) {
-		    			if(kor.Tip.equals("Lekar")) {
-		    			FrameLekovi1 frameL1= new FrameLekovi1 ();
-		    			frameL1.setVisible(true);
-		    			}
-		    			
-		    			if(kor.Tip.equals("Apotekar")) {
-		    			 FrameRecepti3 frameR3= new FrameRecepti3();
-		    			frameR3.setVisible(true);
-		    			
-			    			}
-		    			
-		    			if(kor.Tip.equals("Administrator")) {
-		    				FrameIzvestaj1 frameI1= new FrameIzvestaj1();
-		    				frameI1.setVisible(true);
-			    			
-				    			}
-		    		}
-		    	}
+	    		String kime = txtIme.getText();
+	    		String loz = txtSifra.getText();
+	 
+	    		mainFrame.LogIn(kime, loz);
 		    } 
 		});
 		this.add(btnPrijava);
