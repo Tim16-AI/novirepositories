@@ -18,6 +18,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import gui.Frame.ImagePanel;
 
@@ -36,10 +37,20 @@ public class FrameLekovi1 extends JPanel {
 		
     	lekovi = new LinkedList<Lek>();
     	
+    	Lek lek = new Lek();
+    	
+    	lek.Ime = "brufen";
+    	lek.Cena = (float) 100;
+    	lek.Proizvodjac = "Galenika";
+    	lek.NaRecept = true;
+    	lek.Sifra = "skj123jks";
+    	
+    	lekovi.add(lek);
+    	
     	dodajLek = new FrameLekovi3(this);
     	tblLekovi= new LekoviTabela();
-    	pretragaPanel = new FrameLekovi2();
-    	izmenaPanel = new FrameLekovi4();
+    	pretragaPanel = new FrameLekovi2(this);
+    	izmenaPanel = new FrameLekovi4(lek, this);
     	
 		/*Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
@@ -167,14 +178,67 @@ public class FrameLekovi1 extends JPanel {
     	
     	//osvezi data taele za prikaz lekova
     	
+    	tblLekovi.PopuniPodatke(lekovi);
+    	
     	PrikazLekova();
     }
     
     
-    private void PrikazLekova() {
+    public void PretragaLekova(String tip, String vrednost) {
+    	
+    	LinkedList<Lek> pretrazeniLekovi = new LinkedList<Lek>();
+    	
+    	switch(tip) {
+    	case "Ime":
+    		for(Lek lek : lekovi) {
+    			if(lek.Ime.contains(vrednost))
+    				pretrazeniLekovi.add(lek);
+    		}
+    		break;
+    		
+    	case "Sifra":
+    		for(Lek lek : lekovi) {
+    			if(lek.Sifra.contains(vrednost))
+    				pretrazeniLekovi.add(lek);
+    		}
+    		break;
+    	case "Proizvodjac":
+    		for(Lek lek : lekovi) {
+    			if(lek.Proizvodjac.contains(vrednost))
+    				pretrazeniLekovi.add(lek);
+    		}
+    		break;	
+    	case "Cena":
+    		
+    		String[] tokens= vrednost.split("-");
+    		
+    		for(Lek lek : lekovi) {
+    			if(lek.Cena >= Float.parseFloat(tokens[0]) && lek.Cena <= Float.parseFloat(tokens[0]))
+    				pretrazeniLekovi.add(lek);
+    		}
+    		
+    		break;
+    	}
+    
+    	
     	this.remove(dodajLek);
     	this.remove(pretragaPanel);
     	this.remove(izmenaPanel);
+    	
+    	tblLekovi.PopuniPodatke(pretrazeniLekovi);
+    	
+    	this.add(tblLekovi, BorderLayout.CENTER);
+    	
+    	this.revalidate();
+    	this.repaint();
+    }
+    
+    public void PrikazLekova() {
+    	this.remove(dodajLek);
+    	this.remove(pretragaPanel);
+    	this.remove(izmenaPanel);
+    	
+    	tblLekovi.PopuniPodatke(lekovi);
     	
     	this.add(tblLekovi, BorderLayout.CENTER);
     	
@@ -193,6 +257,21 @@ public class FrameLekovi1 extends JPanel {
 	}
 	
 	private void PrikazIzmene() {
+		int row = tblLekovi.tblLekovi.getSelectedRow();
+		
+		if(row == -1)
+			return;
+		
+		Lek a = new Lek();
+		
+		a.Ime = (String)tblLekovi.tblLekovi.getValueAt(row, 0);
+		a.Proizvodjac = (String)tblLekovi.tblLekovi.getValueAt(row, 1);
+		a.Sifra = (String)tblLekovi.tblLekovi.getValueAt(row, 2);
+		a.NaRecept = (boolean)tblLekovi.tblLekovi.getValueAt(row, 3);
+		a.Cena = (float)tblLekovi.tblLekovi.getValueAt(row, 4);
+		
+		izmenaPanel = new FrameLekovi4(a, this);
+		
 		this.remove(tblLekovi);
 		this.remove(pretragaPanel);
 		this.remove(dodajLek);
@@ -201,6 +280,18 @@ public class FrameLekovi1 extends JPanel {
     	
     	this.revalidate();
     	this.repaint();
+	}
+	
+	public void IzmeniLek(Lek lek){
+		for(Lek lkeIzListe : lekovi) {
+			if(lkeIzListe.Sifra.equals(lek.Sifra)) {
+				lekovi.remove(lkeIzListe);
+			}
+		}
+		
+		lekovi.add(lek);
+		
+		PrikazLekova();
 	}
 	
 	 private void PrikazPretrage() {
@@ -235,26 +326,34 @@ public class FrameLekovi1 extends JPanel {
 	class LekoviTabela extends JPanel {
 		
 		public JTable tblLekovi;
+		public DefaultTableModel dtm;
+		
 		
 		public LekoviTabela() {
+			
 
-			initTable();
+			tblLekovi = new JTable();
+			dtm = new DefaultTableModel(0, 0);
+			
+			PopuniPodatke(lekovi);
 
 			add(tblLekovi.getTableHeader(), BorderLayout.PAGE_START);
 			add(tblLekovi);
 
 			//setLocationRelativeTo(null);
-	}
+		}
 		
-		public void initTable() {
-			// Zaglavlja kolona
-			Object[] columns = new Object[] { "Ime leka", "Proizvodjac", "Sifra", "Recept", "Cena u dinarima"};
-
-			Object[][] data = { { "Brufen", "Famar SA", "835294", "Ne", "100" },
-					{ "Kafetin", "Ð�Ð›ÐšÐ�Ð›ÐžÐ˜Ð” Ð�Ð”-Ð¡ÐºÐ¾Ð¿Ñ˜Ðµ", "645789", "Ne", "130" },
-				 };
-
-		   tblLekovi = new JTable(data, columns);
+		public void PopuniPodatke(LinkedList<Lek> lekoviZaPrikaz) {
+			dtm = new DefaultTableModel(0, 0);
+			Object[] header = new Object[] { "Ime leka", "Proizvodjac", "Sifra", "Recept", "Cena u dinarima"};
+			dtm.setColumnIdentifiers(header);
+			
+			for (Lek lek : lekoviZaPrikaz) {
+		        dtm.addRow(new Object[] { lek.Ime, lek.Proizvodjac, lek.Sifra, 
+		        		lek.NaRecept, lek.Cena });
+			}
+			
+			tblLekovi.setModel(dtm);
 		}
 	}
 	

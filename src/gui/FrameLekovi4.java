@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -23,7 +25,7 @@ import gui.Frame.ImagePanel;
 public class FrameLekovi4 extends JPanel {
 	
 
-    public FrameLekovi4 ()  {
+    public FrameLekovi4 (Lek lek, FrameLekovi1 frame)  {
 		
 		/*Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
@@ -119,19 +121,13 @@ public class FrameLekovi4 extends JPanel {
 		dodavanje.setLayout(new BoxLayout(dodavanje, BoxLayout.Y_AXIS));
 		this.add(dodavanje, BorderLayout.CENTER);
 		
-		JLabel lblSifra= new JLabel("Sifra");
-	    dodavanje.add(lblSifra);
-	    
-	    JTextField txtSifra= new JTextField();
-	    dodavanje.add(txtSifra);
-	    
 	    JPanel stavka1= new JPanel();
 	    dodavanje.add(stavka1);
 		
 		JLabel lblNaziv= new JLabel("Naziv leka");
 	    stavka1.add(lblNaziv);
 	    
-	    JTextField txtNaziv= new JTextField("");
+	    JTextField txtNaziv= new JTextField(lek.Ime);
 	    stavka1.add(txtNaziv);
 	    
 	    JPanel stavka2= new JPanel();
@@ -140,7 +136,7 @@ public class FrameLekovi4 extends JPanel {
 	    JLabel lblProizvodjac= new JLabel("Proizvodjac");
 	    stavka2.add(lblProizvodjac);
 	    
-	    JTextField txtProizvodjac= new JTextField("");
+	    JTextField txtProizvodjac= new JTextField(lek.Proizvodjac);
 	    stavka2.add(txtProizvodjac);
 	    
 	    JPanel stavka3= new JPanel();
@@ -149,7 +145,7 @@ public class FrameLekovi4 extends JPanel {
 	    JLabel lblRecept= new JLabel("Recept");
 	    stavka3.add(lblRecept);
 	    
-	    JTextField txtRecept= new JTextField("");
+	    JTextField txtRecept= new JTextField(Boolean.toString(lek.NaRecept));
 	    stavka3.add(txtRecept);
 	    
 	    
@@ -159,7 +155,7 @@ public class FrameLekovi4 extends JPanel {
 	    JLabel lblCena= new JLabel("Cena");
 	    stavka4.add(lblCena);
 	    
-	    JTextField txtCena= new JTextField("");
+	    JTextField txtCena= new JTextField(Float.toString(lek.Cena));
 	    stavka4.add(txtCena);
 	    
 	    JPanel dugmad= new JPanel();
@@ -169,8 +165,34 @@ public class FrameLekovi4 extends JPanel {
 	    JButton btnIzmeni= new JButton("Izmeni");
 	    dugmad.add(btnIzmeni);
 	    
+	    btnIzmeni.addActionListener(new ActionListener() { 
+		    public void actionPerformed(ActionEvent e) { 
+		    	float cena = Float.parseFloat(txtCena.getText());
+		    	boolean naRecept = Boolean.parseBoolean(txtRecept.getText());
+		    	String ime = txtNaziv.getText();
+		    	String proizvodjac = txtProizvodjac.getText();
+		    	
+		    	Lek lekZaIzmenu = new Lek();
+		    	
+		    	lekZaIzmenu.Sifra = lek.Sifra;
+		    	lekZaIzmenu.Ime = ime;
+		    	lekZaIzmenu.Cena = cena;
+		    	lekZaIzmenu.NaRecept = naRecept;
+		    	lekZaIzmenu.Proizvodjac = proizvodjac;
+		    	
+		    	frame.IzmeniLek(lekZaIzmenu);
+		    } 
+		});
+	    
 	    JButton btnOtkazi= new JButton("Otkazi");
 	    dugmad.add(btnOtkazi);
+	    
+	    btnOtkazi.addActionListener(new ActionListener() { 
+		    public void actionPerformed(ActionEvent e) { 
+		    	
+		    	frame.PrikazLekova();
+		    } 
+		});
 	    
 	    JPanel dolePrazno= new JPanel();
 	    this.add(dolePrazno, BorderLayout.SOUTH);

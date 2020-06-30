@@ -18,6 +18,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.table.*;
 
 import gui.Frame.ImagePanel;
 
@@ -143,11 +144,12 @@ public class FrameKorisnici1 extends JPanel {
     	korisnici.add(korisnik);
     	
     	//osveziti data tabele za prikaz
+    	tblKorisnici.PopuniPodatke();
     	
     	PrikazKorisnika();
     }
     
-    private void PrikazKorisnika() {
+    public void PrikazKorisnika() {
     	this.remove(dodajKorisnikaPanel);
     	this.add(tblKorisnici, BorderLayout.CENTER);
     	
@@ -185,35 +187,34 @@ public class FrameKorisnici1 extends JPanel {
 	class KorisniciTabela extends JPanel {
 		
 		public JTable tblKorisnici;
+		public DefaultTableModel dtm;
 		
 		public KorisniciTabela() {
-
-			initTable();
+			
+			tblKorisnici = new JTable();
+			dtm = new DefaultTableModel(0, 0);
+			
+			PopuniPodatke();
 
 			add(tblKorisnici.getTableHeader(), BorderLayout.PAGE_START);
 			add(tblKorisnici);
 
 			//setLocationRelativeTo(null);
-	}
-		
-		public void initTable() {
-			// Zaglavlja kolona
-			Object[] columns = new Object[] { "Korisnicko ime", "Lozinka", "Ime", "Prezime", " Tip Korisnika"};
-			
-			//Pogeldati za dodavanje korisnika iz liste
-			
-			
-			
-			Object[][] data = { { "rade01", "mirkairada", "Radislav", "Radojevic", "Lekar" },
-					{ "drmrprof", "kokakola", "Dragan", "Draganic", "Lekar" },
-				 };
-
-		   tblKorisnici = new JTable(data, columns);
 		}
-	}
 		
+		public void PopuniPodatke() {
+			dtm = new DefaultTableModel(0, 0);
+			Object[] header = new Object[] { "Korisnicko ime", "Lozinka", "Ime", "Prezime", " Tip Korisnika"};
+			dtm.setColumnIdentifiers(header);
+			
+			for (Korisnik korisnik : korisnici) {
+		        dtm.addRow(new Object[] { korisnik.KorisnickoIme, korisnik.Lozinka, korisnik.Ime, 
+		        		korisnik.Prezime, korisnik.Tip });
+			}
+			
+			tblKorisnici.setModel(dtm);
+		}
 		
-	
-
 	}
+}
 

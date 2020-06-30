@@ -38,7 +38,7 @@ public class ToolBar extends JToolBar{
 		btnKorisnici.setMaximumSize(maxSize);
 		
 		btnKorisnici.addActionListener(new ActionListener() { 
-		    public void actionPerformed(ActionEvent e) { 
+		    public void actionPerformed(ActionEvent e) { 		    	
 		    	mainFrame.PrikazKorisnikaPanel();
 		    } 
 		});

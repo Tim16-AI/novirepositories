@@ -26,29 +26,29 @@ public class Main {
 			frameL1.setVisible(true);
 			break;*/
 			
-			case 3: FrameLekovi2 frameL2= new FrameLekovi2();
+			/*case 3: FrameLekovi2 frameL2= new FrameLekovi2();
 			frameL2.setVisible(true);
-			break;
+			break;*/
 			
 		    /*case 4: FrameLekovi3 frameL3= new FrameLekovi3();
 			frameL3.setVisible(true);
 			break;*/
 			
-			case 5: FrameLekovi4 frameL4= new FrameLekovi4();
+			/*case 5: FrameLekovi4 frameL4= new FrameLekovi4();
 			frameL4.setVisible(true);
-			break;
+			break;*/
 			
 			case 6: FrameRecepti1 frameR1= new FrameRecepti1();
 			frameR1.setVisible(true);
 			break;
 			
-			case 7: FrameRecepti2 frameR2= new FrameRecepti2();
+			/*case 7: FrameRecepti2 frameR2= new FrameRecepti2();
 			frameR2.setVisible(true);
-			break;
+			break;*/
 			
-			case 8: FrameRecepti3 frameR3= new FrameRecepti3();
+			/*case 8: FrameRecepti3 frameR3= new FrameRecepti3();
 			frameR3.setVisible(true);
-			break;
+			break;*/
 			
 			/*case 9: FrameKorisnici1 frameK1= new FrameKorisnici1();
 			frameK1.setVisible(true);

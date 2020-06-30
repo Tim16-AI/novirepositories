@@ -174,6 +174,11 @@ public class FrameKorisnici2 extends JPanel {
 	    
 	    JButton btnOtkazi= new JButton("Otkazi");
 	    dugmad.add(btnOtkazi);
+	    btnOtkazi.addActionListener(new ActionListener() { 
+		    public void actionPerformed(ActionEvent e) { 
+		    	frame.PrikazKorisnika();
+		    } 
+		});
 	    
 	    JPanel dolePrazno= new JPanel();
 	    this.add(dolePrazno, BorderLayout.SOUTH);

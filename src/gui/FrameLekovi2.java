@@ -7,6 +7,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -22,7 +24,7 @@ import gui.Frame.ImagePanel;
 
 public class FrameLekovi2 extends JPanel{
 	
-	public FrameLekovi2 () {
+	public FrameLekovi2 (FrameLekovi1 frame) {
 		
 		/*Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
@@ -92,39 +94,42 @@ public class FrameLekovi2 extends JPanel{
 		JButton btnIzmena= new JButton("Izmeni lek");
 		dugmici.add(btnIzmena);
 		btnIzmena.setBackground(new Color(77,77,77));	//promenjena pozadina dugmeta
-		btnIzmena.setForeground(Color.WHITE);
+		btnIzmena.setForeground(Color.WHITE);*/
 		
 		///////////////////////////////////////////////////////////////////////////////////
 		//ne radi padajuci meni
 		
-		JMenu menuSort= new JMenu("Pretraga po:");
-		menuSort.setBackground(new Color(77,77,77));	//promenjena pozadina dugmeta
-		menuSort.setForeground(Color.WHITE);
 		
-		JMenuItem itIme= new JMenuItem("Imenu");
-		JMenuItem itSifra= new JMenuItem("Sifri");
-		JMenuItem itCena= new JMenuItem("Ceni");
-		JMenuItem itProizvodjac= new JMenuItem("Proizvodjacu");
-		
-		menuSort.add(itIme);
-		menuSort.addSeparator();
-		menuSort.add(itSifra);
-		menuSort.addSeparator();
-		menuSort.add(itCena);
-		menuSort.addSeparator();
-		menuSort.add(itProizvodjac);
-		
-		dugmici.add(menuSort);*/
+		//dugmici.add(menuSort);
 		
 		
 		JPanel panPretraga= new JPanel();
 		this.add(panPretraga ,BorderLayout.CENTER);
 		
-		JTextField pretraga=new JTextField("Pretraga...              ");
-		 panPretraga.add(pretraga,BorderLayout.CENTER);  
-		 
+		
+		JLabel lblTip= new JLabel("Tip");
+		panPretraga.add(lblTip);
+	    
+	    JTextField txtTip= new JTextField("Unsi tip pretrage...");
+	    panPretraga.add(txtTip);
+		
+	    JLabel lblVrednost= new JLabel("Vrednost");
+		panPretraga.add(lblVrednost);
+	    
+	    JTextField txtVrednost= new JTextField("Unesi vrednost pretrage...");
+	    panPretraga.add(txtVrednost); 
+	    
 		 JButton btnOk= new JButton("OK");
 		 panPretraga.add(btnOk, BorderLayout.CENTER);
+		 
+		 btnOk.addActionListener(new ActionListener() { 
+			    public void actionPerformed(ActionEvent e) { 
+			    	String tip = txtTip.getText();
+			    	String vrednost = txtVrednost.getText();
+			    	
+			    	frame.PretragaLekova(tip, vrednost);
+			    } 
+			});
 		 
 		  JPanel dolePrazno= new JPanel();
 		  this.add(dolePrazno, BorderLayout.SOUTH);

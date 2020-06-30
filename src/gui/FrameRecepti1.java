@@ -6,6 +6,10 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.util.LinkedList;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -16,14 +20,35 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import gui.Frame.ImagePanel;
 
 public class FrameRecepti1 extends JPanel {
 	
- 
+	LinkedList<Recept> recepti;
+	
+	ReceptiTabela tblRecepti;
+	FrameRecepti2 pretragaPanel;
+	FrameRecepti3 dodajPanel;
+	
     public FrameRecepti1 ()  {
 		
+    	recepti = new LinkedList<Recept>();
+    	
+    	Recept recept = new Recept();
+    	
+    	recept.JMBGPacijenta = "12354436";
+    	recept.IdLeka = "32424";
+    	recept.UkupnaCena = (float) 200;
+    	recept.Datum = "10-10-2020";
+    	recept.Sifra = 123; 
+    	
+    	recepti.add(recept);
+    	
+    	pretragaPanel = new FrameRecepti2(this);
+    	dodajPanel = new FrameRecepti3(this);
+    	
 		/*Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
         int screenHeight = screenSize.height;
@@ -79,20 +104,39 @@ public class FrameRecepti1 extends JPanel {
 		btnPrikaz.setBackground(new Color(77,77,77));	//promenjena pozadina dugmeta
 		btnPrikaz.setForeground(Color.WHITE);
 		
+		btnPrikaz.addActionListener(new ActionListener() { 
+		    public void actionPerformed(ActionEvent e) { 
+		    	PrikazRecepata();
+		    } 
+		});
+		
+		
 		JButton btnPretraga= new JButton("Pretraga");
 		dugmici.add(btnPretraga);
 		btnPretraga.setBackground(new Color(77,77,77));	//promenjena pozadina dugmeta
 		btnPretraga.setForeground(Color.WHITE);
+		
+		btnPretraga.addActionListener(new ActionListener() { 
+		    public void actionPerformed(ActionEvent e) { 
+		    	PrikazPretrage();
+		    } 
+		});
 		
 		JButton btnDodavanje= new JButton("Dodaj recept");
 		dugmici.add(btnDodavanje);
 		btnDodavanje.setBackground(new Color(77,77,77));	//promenjena pozadina dugmeta
 		btnDodavanje.setForeground(Color.WHITE);
 		
+		btnDodavanje.addActionListener(new ActionListener() { 
+		    public void actionPerformed(ActionEvent e) { 
+		    	PrikazDodavanja();
+		    } 
+		});
+		
         ///////////////////////////////////////////////////////////////////////////////////
         //ne radi padajuci meni
 
-        JMenu menuSort= new JMenu("Sortiraj po:");
+        /*JMenu menuSort= new JMenu("Sortiraj po:");
         menuSort.setBackground(new Color(77,77,77));	//promenjena pozadina dugmeta
         menuSort.setForeground(Color.WHITE);
 
@@ -107,9 +151,9 @@ public class FrameRecepti1 extends JPanel {
         menuSort.add(itDatum);
         menuSort.addSeparator();
 
-        dugmici.add(menuSort);
+        dugmici.add(menuSort);*/
 		
-		ReceptiTabela tblRecepti= new ReceptiTabela();
+		tblRecepti= new ReceptiTabela();
 		
 		
 		this.add(tblRecepti, BorderLayout.CENTER);
@@ -117,7 +161,88 @@ public class FrameRecepti1 extends JPanel {
 	    
 	}
 	
-	
+ public void PretragaRecepata(String tip, String vrednost) {
+    	
+    	LinkedList<Recept> PretrazeniRecepti = new LinkedList<Recept>();
+    	
+    	switch(tip) {
+    	case "Sifra":
+    		int sifra = Integer.parseInt(vrednost);
+    		for(Recept recept : recepti) {
+    			if(recept.Sifra == sifra)
+    				PretrazeniRecepti.add(recept);
+    		}
+    		break;
+    		
+    	case "Lekar":
+    		for(Recept recept : recepti) {
+    			if(recept.IdLeka.contains(vrednost))
+    				PretrazeniRecepti.add(recept);
+    		}
+    		break;
+    	case "Pacijent":
+    		for(Recept recept : recepti) {
+    			if(recept.JMBGPacijenta.contains(vrednost))
+    				PretrazeniRecepti.add(recept);
+    		}
+    		break;	
+    	}
+    
+    	
+    	this.remove(pretragaPanel);
+    	this.remove(dodajPanel);
+    	
+    	tblRecepti.PopuniPodatke(PretrazeniRecepti);
+    	
+    	this.add(tblRecepti, BorderLayout.CENTER);
+    	
+    	this.revalidate();
+    	this.repaint();
+    }
+    
+    
+    public void DodajRecept(Recept recept) {
+    	recepti.add(recept);
+    	
+    	//osvezi data taele za prikaz lekova
+    	
+    	tblRecepti.PopuniPodatke(recepti);
+    	
+    	PrikazRecepata();
+    }
+    
+    private void PrikazPretrage() {
+    	this.remove(tblRecepti);
+    	this.remove(dodajPanel);
+    	
+    	this.add(pretragaPanel, BorderLayout.CENTER);
+    	
+    	this.revalidate();
+    	this.repaint();
+    }
+    
+    private void PrikazDodavanja() {
+    	this.remove(tblRecepti);
+    	this.remove(pretragaPanel);
+    	
+    	this.add(dodajPanel, BorderLayout.CENTER);
+    	
+    	this.revalidate();
+    	this.repaint();
+    }
+    
+    private void PrikazRecepata() {
+    	this.remove(pretragaPanel);
+    	this.remove(dodajPanel);
+    	
+    	tblRecepti.PopuniPodatke(recepti);
+    	
+    	this.add(tblRecepti, BorderLayout.CENTER);
+    	
+    	this.revalidate();
+    	this.repaint();
+    }
+    
 	class ImagePanel extends JPanel {
 
 		  private Image img;
@@ -140,27 +265,33 @@ public class FrameRecepti1 extends JPanel {
 	class ReceptiTabela extends JPanel {
 		
 		public JTable tblRecepti;
+		public DefaultTableModel dtm;
 		
 		public ReceptiTabela() {
-
-			initTable();
+			tblRecepti = new JTable();
+			dtm = new DefaultTableModel(0, 0);
+			
+			PopuniPodatke(recepti);
 
 			add(tblRecepti.getTableHeader(), BorderLayout.PAGE_START);
 			add(tblRecepti);
 
 			//setLocationRelativeTo(null);
-	}
+		}
 		
-		public void initTable() {
-			// Zaglavlja kolona
-			Object[] columns = new Object[] { "Sifra", "Identifikator lekara", "JMBG pacijenta",
-					                          "Datum i vreme", "Lekovi i kolicina", "Ukupna cena u dinarima"};
-
-			Object[][] data = { { "74586687", "678456", "1234567891234", "25.06.2020.; 12.48", "Xanaxs 0.2mg x1", "500" },
-					{ "98935676", "969533", "9876543219876", "30.06.2020.; 16.20", "Lorazepam 1mg x1", "180" },
-				 };
-
-			tblRecepti = new JTable(data, columns);
+		
+		public void PopuniPodatke(LinkedList<Recept> receptiZaPrikaz) {
+			dtm = new DefaultTableModel(0, 0);
+			Object[] header = new Object[] { "Sifra", "Identifikator lekara", "JMBG pacijenta",
+                    "Datum i vreme", "Ukupna cena u dinarima"};
+			dtm.setColumnIdentifiers(header);
+			
+			for (Recept recept : receptiZaPrikaz) {
+		        dtm.addRow(new Object[] { recept.Sifra, recept.IdLeka, recept.JMBGPacijenta, 
+		        		recept.Datum, recept.UkupnaCena });
+			}
+			
+			tblRecepti.setModel(dtm);
 		}
 	}
 		

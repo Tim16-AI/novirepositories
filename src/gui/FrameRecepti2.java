@@ -7,6 +7,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -22,7 +24,7 @@ import gui.Frame.ImagePanel;
 
 public class FrameRecepti2 extends JPanel{
 	
-	public FrameRecepti2 () {
+	public FrameRecepti2 (FrameRecepti1 frame) {
 		
 		/*Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
@@ -71,7 +73,7 @@ public class FrameRecepti2 extends JPanel{
 		
 		this.setLayout(new BorderLayout(20, 20));
 		
-		JPanel dugmici= new JPanel();
+		/*JPanel dugmici= new JPanel();
 		this.add(dugmici, BorderLayout.NORTH);
 		
 		JButton btnPrikaz= new JButton("Postojeci recepti");
@@ -111,16 +113,35 @@ public class FrameRecepti2 extends JPanel{
         menuSort.addSeparator();
         menuSort.add(itLek);
 
-        dugmici.add(menuSort);
+        dugmici.add(menuSort);*/
 		
 		JPanel panPretraga= new JPanel();
 		this.add(panPretraga ,BorderLayout.CENTER);
 		
-		JTextField pretraga=new JTextField("Pretraga...              ");
-		 panPretraga.add(pretraga,BorderLayout.CENTER);  
-		 
+		JLabel lblTip= new JLabel("Tip");
+		panPretraga.add(lblTip);
+	    
+	    JTextField txtTip= new JTextField("Unsi tip pretrage...");
+	    panPretraga.add(txtTip);
+		
+	    JLabel lblVrednost= new JLabel("Vrednost");
+		panPretraga.add(lblVrednost);
+	    
+	    JTextField txtVrednost= new JTextField("Unesi vrednost pretrage...");
+	    panPretraga.add(txtVrednost); 
+	    
 		 JButton btnOk= new JButton("OK");
 		 panPretraga.add(btnOk, BorderLayout.CENTER);
+		 
+		 btnOk.addActionListener(new ActionListener() { 
+			    public void actionPerformed(ActionEvent e) { 
+			    	String tip = txtTip.getText();
+			    	String vrednost = txtVrednost.getText();
+			    	
+			    	frame.PretragaRecepata(tip, vrednost);
+			    } 
+			});
+		 
 		 
 		  JPanel dolePrazno= new JPanel();
 		  this.add(dolePrazno, BorderLayout.SOUTH);

@@ -7,6 +7,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -22,7 +24,7 @@ import gui.Frame.ImagePanel;
 
 public class FrameRecepti3 extends JPanel{
 	
-	public FrameRecepti3 () {
+	public FrameRecepti3 (FrameRecepti1 frame) {
 		
 		/*Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
@@ -71,7 +73,7 @@ public class FrameRecepti3 extends JPanel{
 		
 		this.setLayout(new BorderLayout(20, 20));
 		
-		JPanel dugmici= new JPanel();
+		/*JPanel dugmici= new JPanel();
 		this.add(dugmici, BorderLayout.NORTH);
 		
 		JButton btnPrikaz= new JButton("Postojeci recepti");
@@ -108,7 +110,7 @@ public class FrameRecepti3 extends JPanel{
         menuSort.add(itDatum);
         menuSort.addSeparator();
 
-        dugmici.add(menuSort);
+        dugmici.add(menuSort);*/
 		
         JPanel dodavanje= new JPanel();
 		dodavanje.setLayout(new BoxLayout(dodavanje, BoxLayout.Y_AXIS));
@@ -132,19 +134,13 @@ public class FrameRecepti3 extends JPanel{
 	    JTextField txtVreme= new JTextField();
 	    dodavanje.add(txtVreme);
 	    
-	    JLabel lblLekovi= new JLabel("Spisak i kolicina lekova");
-	    dodavanje.add(lblLekovi);
-	    
-	    JTextField txtLekovi= new JTextField();
-	    dodavanje.add(txtLekovi);
-	    
 	    JLabel lblSifra= new JLabel("Sifra recepta");
 	    dodavanje.add(lblSifra);
 	    
 	    JTextField txtSifra= new JTextField();
 	    dodavanje.add(txtSifra);
 	    
-	    JLabel lblSifra1= new JLabel("Sifra lekara");
+	    JLabel lblSifra1= new JLabel("Ukupna cena");
 	    dodavanje.add(lblSifra1);
 	    
 	    JTextField txtSifra1= new JTextField();
@@ -156,6 +152,27 @@ public class FrameRecepti3 extends JPanel{
 	    
 	    JButton btnPotvrda= new JButton("Potvrda");
 	    dugmad.add(btnPotvrda);
+	    
+	    btnPotvrda.addActionListener(new ActionListener() { 
+		    public void actionPerformed(ActionEvent e) { 
+		    	String id = txtId.getText();
+		    	String jmbg = txtJmbg.getText();
+		    	String datum = txtVreme.getText();
+		    	String sifra = txtSifra.getText();
+		    	String cena = txtSifra1.getText();
+		    	
+		    	Recept recept = new Recept();
+		    	
+		    	recept.Datum = datum;
+		    	recept.IdLeka = id;
+		    	recept.JMBGPacijenta = jmbg;
+		    	recept.Sifra = Integer.parseInt(sifra);
+		    	recept.UkupnaCena = Float.valueOf(cena);
+		    	
+		    	frame.DodajRecept(recept);
+		    } 
+		});
+	    
 	    
 	    JButton btnOtkazi= new JButton("Otkazi");
 	    dugmad.add(btnOtkazi);

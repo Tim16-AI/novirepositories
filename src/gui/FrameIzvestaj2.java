@@ -66,10 +66,10 @@ public class FrameIzvestaj2 extends JFrame {
 		naslov.add(lblNaslov);
 		
 		JPanel centralni= new JPanel();
-		centralni.setLayout(new BorderLayout(20, 20));
-		glavniProzor.add(centralni, BorderLayout.CENTER);
+	
+		glavniProzor.add(centralni, BorderLayout.CENTER);*/
 		
-		JPanel dugmici= new JPanel();
+		/*JPanel dugmici= new JPanel();
 		centralni.add(dugmici, BorderLayout.NORTH);
 		
 		JButton btnPrikaz= new JButton("Ukupna prodaja svih lekova");

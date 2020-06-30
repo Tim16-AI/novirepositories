@@ -24,6 +24,7 @@ public class Frame extends JFrame {
 	FrameRecepti1 prikazRecepataPanel;
 	FrameIzvestaj1 prikazIzvestaja;
 	FrameKupovina1 prikazKupovinaPanel;
+	ToolBar tb;
 	
 	JPanel glavniProzor;
 	
@@ -65,7 +66,7 @@ public class Frame extends JFrame {
 		glavniProzor.setBackground(new Color(77,77,77));
 		
 		
-		ToolBar tb= new ToolBar (this);
+		tb= new ToolBar (this);
 		tb.setBackground(new Color(77,77,77));
 		glavniProzor.add(tb, BorderLayout.WEST);
 		
